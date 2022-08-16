@@ -1,0 +1,9 @@
+<!-- Checking for those errors from server post route, looping through the array and desplaying a bs alert-->
+<% if (typeof errors != 'undefined') { %>
+  <% errors.forEach(function(error) { %>
+    <div class="alert alert-<%= error.type %> alert-dismissible fade show" role="alert">
+      <i class="fa fa-exclamation-circle"></i> <%= error.msg %>
+      <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% }); %>
+<% } %>
