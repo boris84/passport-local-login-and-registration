@@ -6,7 +6,7 @@ let dbConnection
 module.exports = {
   connectToDb: (cb) => {
     // atlas connection string
-    MongoClient.connect(process.env.ATLAS_CONNECTION_STRING)
+    MongoClient.connect(process.env.localConnectionString)
      .then((client) => {
        dbConnection = client.db()
        console.log('connected to mongodb..');

@@ -9,15 +9,15 @@
   padding: 0.5rem 0.5rem !important;
 }
 .fa-exclamation-circle {
-  padding-right: 2px;
+  padding: 0 4px;
 }
 .btn {
   padding: 4px 10px 6px 10px;
 }
 .card {
   background: darkslategray;
-  --bs-card-spacer-y: 60px;
-  --bs-card-spacer-x: 5rem;
+  --bs-card-spacer-y: 40px;
+  --bs-card-spacer-x: 4rem;
 }
 
 @media only screen and (max-width: 475px) {
@@ -25,7 +25,6 @@
     --bs-card-spacer-x: 3.5rem;
   }
 }
-
 @media only screen and (max-width: 400px) {
   .card {
     --bs-card-spacer-x: 2.5rem;
@@ -41,13 +40,13 @@
 
 
 
-<div class="row mt-4">
-  <div class="col-md-6 col-sm-12 m-auto">
+<div class="row mt-5">
+  <div class="col-lg-6 col-md-8 m-auto">
     <div class="card card-body">
       <h1 class="text-center mb-3">
         <i class="fa fa-user-plus"></i> Register
       </h1>
-      <!-- bootstraps alert messages -->
+      <%# bootstraps alert messages %>
       <%- include ("./partials/messages"); %>
       <form action="/register" method="POST">
         <div class="form-group mb-2">
