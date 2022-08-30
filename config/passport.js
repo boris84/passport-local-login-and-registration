@@ -1,16 +1,6 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bycrpt = require('bcryptjs');
-// const { ObjectId } = require('mongodb');
-
-// // Load database
-// const { connectToDb, getDb } = require('../db');
-//
-// // Connect to mongodb
-// connectToDb((err) => {
-//   if (!err) {
-//     db = getDb()
-//   }
-// });
+const { ObjectId } = require('mongodb');
 
 
 module.exports = function(passport) {
@@ -39,16 +29,20 @@ module.exports = function(passport) {
     })
   );
 
-
+  // take users id and stuff in cookie
   passport.serializeUser((user, done) => {
-    done(null, user._id);
+    let id = user._id;
+    done(null, id);
   });
 
-  passport.deserializeUser((_id, done) => {
-    db.collection('users')
-    .findOne({_id: _id})
-    .then((err, user) => {
-       done(err, true);
-    })
+  // when browser makes request for a protected resources cookie comes back and we deserialize it and grab the user from that id
+  passport.deserializeUser((id, done) => {
+    if (ObjectId.isValid(id)) {
+       db.collection('users')
+        .findOne({_id: ObjectId(id)})
+        .then(user => {
+          done(null, user);
+        })
+    }
   });
 }

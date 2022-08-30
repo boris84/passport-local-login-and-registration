@@ -6,6 +6,7 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const { ensureAuthenticated } = require('./config/auth');
 const PORT = process.env.PORT || 3000;
 const app = express();
 
@@ -41,6 +42,9 @@ app.use(session({
   secret: 'secret',
   resave: true,
   saveUninitialized: true,
+  cookie: {
+    expires: false
+  }
 }));
 
 // Passport middleware. Initialization our local Strategy needs to sit here after the session middleware.
@@ -69,7 +73,7 @@ app.use((req, res, next) => {
 
 
 
-let errors
+
 
 
 
@@ -83,16 +87,24 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('login', {
-    errors,
+  res.render('login');
+});
+
+app.get('/dashboard', ensureAuthenticated, (req, res) => {
+  res.render('dashboard', {
+    name: req.user.name
   });
 });
 
-app.get('/dashboard', (req, res) => {
-  res.render('dashboard');
+app.get('/logout', (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    req.flash('success_msg', 'You are logged out');
+    res.redirect('/login');
+  });
 });
-
-
 
 
 
@@ -102,7 +114,7 @@ app.post('/register', (req, res) => {
 
   // Create array to store errors
   // what we're doing here with the error messages is simply rendering a views and passing the messages in using boostrap alerts.
-  errors = [];
+  let errors = [];
 
   // Check required fields
   if (!name || !email || !password || !password2) {
