@@ -1,12 +1,21 @@
 <style>
+h1 {
+  padding-bottom: 10px;
+}
+
 .alert {
   padding: 5px;
+  // margin: 2px 0 5px 0;
 }
 #name, #email, #password, #password2 {
   font-size: 0.9rem;
 }
 .btn-close {
   padding: 0.5rem 0.5rem !important;
+  filter: brightness(0) invert(1);
+}
+.btn-close:focus {
+  box-shadow:none;
 }
 .fa-exclamation-circle {
   padding: 0 4px;
@@ -17,7 +26,23 @@
 .card {
   background: darkslategray;
   --bs-card-spacer-y: 40px;
-  --bs-card-spacer-x: 4rem;
+  --bs-card-spacer-x: 5rem;
+}
+
+@media only screen and (max-width: 1024px) {
+  .card {
+    --bs-card-spacer-y: 40px;
+    --bs-card-spacer-x: 2rem;
+    // width: 520px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .card {
+    --bs-card-spacer-y: 40px;
+    --bs-card-spacer-x: 2rem;
+    // width: 520px;
+  }
 }
 
 @media only screen and (max-width: 475px) {
@@ -38,7 +63,7 @@
 
 @media only screen and (max-width: 320px) {
   .card {
-    top: 100px;
+    top: 50px;
   }
 }
 </style>
@@ -50,7 +75,7 @@
   <div class="col-lg-6 col-md-8 m-auto">
     <div class="card card-body">
       <h1 class="text-center mb-3">
-        <i class="fa fa-user-plus"></i> Register
+         Register
       </h1>
       <%# bootstraps alert messages %>
       <%- include ("./partials/messages"); %>

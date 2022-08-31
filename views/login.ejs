@@ -1,24 +1,29 @@
 <style>
   .alert {
-    padding: 5px 5px 6px 5px;
+    padding: 5px 5px 5px 5px;
+    margin: 2px 0 5px 0;
   }
   #email, #password {
     font-size: 0.9rem;
   }
   .btn-close {
-    padding: 0.6rem 0.5rem !important;
+    padding: 8px 0.5rem !important;
+    filter: brightness(0) invert(1);
   }
-  .fa-check-circle {
+  .btn-close:focus {
+    box-shadow:none;
+  }
+  .fa-exclamation-circle, .fa-check-circle {
     padding: 0 4px;
   }
   .btn {
     padding: 4px 10px 6px 10px;
   }
   .card {
-      top: 80px;
       background: darkslategray;
       --bs-card-spacer-y: 40px;
-      --bs-card-spacer-x: 4rem;
+      --bs-card-spacer-x: 5rem;
+      margin-top: 100px;
   }
   @media only screen and (max-width: 475px) {
     .card {
@@ -35,11 +40,7 @@
       --bs-card-spacer-x: 2rem;
     }
   }
-  @media only screen and (max-width: 320px) {
-    .card {
-      top: 100px;
-    }
-  }
+
 </style>
 
 
@@ -50,7 +51,7 @@
 <div class="row mt-5">
   <div class="col-lg-6 col-md-8 m-auto">
     <div class="card card-body">
-      <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i> Login</h1>
+      <h1 class="text-center mb-3">Login</h1>
       <%# flash message %>
       <%- include ("./partials/messages"); %>
       <form action="/login" method="POST">
